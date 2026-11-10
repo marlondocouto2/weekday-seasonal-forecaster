@@ -60,7 +60,8 @@ def main() -> None:
     by_weekday = error_by_weekday(backtest)
     results.to_csv(out_dir / "results.csv", index=False, float_format="%.4f")
     by_weekday.to_csv(out_dir / "error_by_weekday.csv", index=False, float_format="%.4f")
-    backtest.to_csv(out_dir / "backtest_forecasts.csv.gz", index=False, float_format="%.2f")
+    backtest.to_csv(out_dir / "backtest_forecasts.csv.gz", index=False, float_format="%.2f",
+                    compression={"method": "gzip", "mtime": 0})  # no timestamp: same data, same file
 
     # Charts: the last full calendar quarter of the test period.
     last = backtest["date"].max()
